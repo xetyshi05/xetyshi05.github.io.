@@ -136,4 +136,36 @@ window.addEventListener("load", () => {
 
 		observer_ffj.observe(ffj_container);
 	}
+
+	// Snow effect
+	const prefersReducedMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)"
+	).matches;
+	if (!prefersReducedMotion) {
+		const snowLayer = document.createElement("div");
+		snowLayer.className = "snow-layer";
+		document.body.appendChild(snowLayer);
+
+		const flakesCount = Math.min(
+			60,
+			Math.max(25, Math.floor(window.innerWidth / 20))
+		)+10;
+		for (let i = 0; i < flakesCount; i += 1) {
+			const flake = document.createElement("span");
+			flake.className = "snowflake";
+
+			const size = 2 + Math.random() * 4;
+			flake.style.left = `${Math.random() * 100}%`;
+			flake.style.animationDuration = `${6 + Math.random() * 8}s`;
+			flake.style.animationDelay = `${Math.random() * 8}s`;
+			flake.style.opacity = (0.4 + Math.random() * 0.6).toFixed(2);
+			flake.style.width = `${size}px`;
+			flake.style.height = `${size}px`;
+			const offset =
+				(Math.random() > 0.5 ? 1 : -1) * (10 + Math.random() * 30);
+			flake.style.setProperty("--snow-offset", `${offset}px`);
+
+			snowLayer.appendChild(flake);
+		}
+	}
 });

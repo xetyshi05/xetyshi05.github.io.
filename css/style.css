@@ -8,6 +8,36 @@ html {
 	scroll-behavior: smooth;
 }
 
+/* Snow */
+
+.snow-layer {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 3;
+}
+
+.snowflake {
+	position: absolute;
+	top: -10px;
+	background: white;
+	border-radius: 50%;
+	animation-name: snowFall;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	will-change: transform;
+}
+
+@keyframes snowFall {
+	0% {
+		transform: translate3d(0, -10px, 0);
+	}
+	100% {
+		transform: translate3d(var(--snow-offset, 0px), 110vh, 0);
+	}
+}
+
 /* PRELOADER */
 
 #preloader {
